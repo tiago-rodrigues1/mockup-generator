@@ -12,7 +12,12 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ## 💻 Pré-requisitos
 
-* Possuir `nodejs v6.4.0+` instalado
+- Possuir `nodejs v6.4.0+` instalado
+
+## 🛠️ Tecnologias
+
+- [Nodejs](https://nodejs.org/)
+- [Puppeteer](https://pptr.dev/)
 
 ## 🚀 Instalando
 

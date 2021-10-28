@@ -6,6 +6,13 @@ async function getSiteImage(url) {
 	try {
 		const browser = await puppeteer.launch({ headless: false });
 		const page = await browser.newPage();
+
+		await page.setViewport({
+			width: 1200,
+			height: 800,
+			deviceScaleFactor: 1,
+		});
+
 		await page.goto(url);
 
 		await page.screenshot({ path: "siteImg.png" });

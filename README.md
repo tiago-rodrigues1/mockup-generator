@@ -2,6 +2,7 @@
 
 > Gerador de mockups (laptop) usando puppeteer
 
+
 ### Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
@@ -10,14 +11,17 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Usuário poder definir a pasta onde o mockup deverá ser baixado
 - [ ] Usuário poder definir o nome do arquivo do mockup
 
+
 ## 💻 Pré-requisitos
 
 - Possuir `nodejs v6.4.0+` instalado
+
 
 ## 🛠️ Tecnologias
 
 - [Nodejs](https://nodejs.org/)
 - [Puppeteer](https://pptr.dev/)
+
 
 ## 🚀 Instalando
 
@@ -40,6 +44,7 @@ npm i
 # ou yarn
 ```
 
+
 ## ☕ Usando
 
 Rode o comando:
@@ -47,6 +52,22 @@ Rode o comando:
 ```
 node index.js
 ```
+
+
+### Inputs
+
+- Link da página que você deseja gerar o mockup
+
+```
+🔗 URL: # https://example.com
+```
+
+- Nome que você deseja salvar o arquivo do mockup gerado
+
+```
+📁 Nome do arquivo do mockup: # myMockup
+```
+
 
 ## 📝 Licença
 

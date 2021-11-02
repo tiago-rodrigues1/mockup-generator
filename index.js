@@ -5,12 +5,15 @@ const readlineSync = require("readline-sync");
 
 async function robot() {
 	const url = readlineSync.question("\n🔗 URL: ");
+	const mockupFileName = readlineSync.question(
+		"\n📁 Nome do arquivo do mockup: "
+	);
 
 	try {
 		await getSiteImage(url);
 		console.log("- Imagem do site tirada 📸");
 
-		await generateMockup();
+		await generateMockup(mockupFileName);
 		console.log("- Mockup gerado com sucesso ✅");
 
 		console.log("\n- Verifique sua pasta de downloads 📂");

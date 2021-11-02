@@ -1,12 +1,14 @@
 const puppeteer = require("puppeteer");
 
-async function generateMockup() {
+async function generateMockup(mockupFileName) {
 	console.log("\n- Indo gerar mockup 💻");
 
 	try {
 		const browser = await puppeteer.launch({ headless: false });
 		const page = await browser.newPage();
 		await page.goto("https://studio.mockmagic.com/");
+
+		await page.type(".sc-gKsewC.bKbstl", mockupFileName);
 
 		const [fileChooser] = await Promise.all([
 			page.waitForFileChooser(),

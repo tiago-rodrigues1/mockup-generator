@@ -81,9 +81,7 @@ export const ChooseGenerateMode = () => {
 		<>
 			<section className="flex-1 flex flex-col gap-8 sm:gap-16">
 				<header className="flex gap-4 items-center">
-					<h1 className="font-bold text-xl sm:text-2xl">
-						Modo de geração
-					</h1>
+					<h1 className="title-primary">Modo de geração</h1>
 					<InfoButton />
 				</header>
 				<main className="flex-1 flex flex-col gap-12 sm:flex-row justify-evenly items-center">

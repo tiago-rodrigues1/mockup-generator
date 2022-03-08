@@ -10,3 +10,9 @@
 	box-sizing: border-box;
 	font-family: "Inter", sans-serif;
 }
+
+@layer components {
+	.title-primary {
+		@apply font-bold text-xl sm:text-2xl;
+	}
+}

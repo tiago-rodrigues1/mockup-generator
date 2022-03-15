@@ -15,4 +15,20 @@
 	.title-primary {
 		@apply font-bold text-xl sm:text-2xl;
 	}
+
+	.btn-base {
+		@apply w-full sm:max-w-sm h-12 px-4 grid place-items-center rounded-lg;
+	}
+
+	.btn-cta {
+		@apply btn-base bg-purple-500 duration-200 hover:bg-purple-600;
+	}
+
+	.btn-ghost {
+		@apply btn-base border-2 border-purple-400 hover:bg-purple-400 hover:bg-opacity-25 text-purple-400;
+	}
+
+	/* .btn-text {
+		@apply text-purple-400 h-12 px-4 duration-200 hover:bg-purple-400 hover:bg-opacity-20 rounded-lg;
+	} */
 }

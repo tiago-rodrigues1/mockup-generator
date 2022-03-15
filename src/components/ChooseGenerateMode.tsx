@@ -88,7 +88,7 @@ export const ChooseGenerateMode = () => {
 					<GeneraMethodCard
 						imageSrc="/images/generate-by-file.svg"
 						methodName="Arquivo"
-						redirectTo="/"
+						redirectTo="/generate-mode/file"
 					/>
 					<GeneraMethodCard
 						imageSrc="/images/auto-generate.svg"

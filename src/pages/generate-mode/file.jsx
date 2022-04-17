@@ -6,6 +6,7 @@ import { useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { BasicLayout } from "../../components/BasicLayout";
 import { Button } from "../../components/Button";
+import { DownloadMockup } from "../../components/DownloadMockup";
 import { LogoTitle } from "../../components/LogoTitle";
 
 import { generate } from "../../utils/GenerateMockup";
@@ -13,6 +14,12 @@ import { generate } from "../../utils/GenerateMockup";
 export default function File() {
 	const [selectedFile, setSelectedFile] = useState();
 	const [selectedFileSrc, setSelectedFileSrc] = useState("");
+	const [mockupUrl, setMockupUrl] = useState("");
+	const [canDownload, setCanDownload] = useState(false);
+
+	function togglePopup() {
+		setCanDownload((prevState) => !prevState);
+	}
 
 	function handleInputFile(event) {
 		const { files } = event.target;
@@ -32,7 +39,8 @@ export default function File() {
 			if (selectedFile) {
 				const mockup = await generate(selectedFile);
 
-				window.location.href = mockup;
+				setMockupUrl(mockup);
+				setCanDownload(true);
 			} else {
 				throw new Error("Não foi possível gerar a imagem");
 			}
@@ -48,6 +56,10 @@ export default function File() {
 			</Head>
 
 			<LogoTitle />
+
+			{canDownload ? (
+				<DownloadMockup toggle={togglePopup} mockupUrl={mockupUrl} />
+			) : null}
 
 			<form
 				className="flex-1 flex flex-col items-center gap-8 sm:gap-12"

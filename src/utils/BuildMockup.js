@@ -1,10 +1,10 @@
 import { Image } from "image-js";
 
-export async function GenerateMockup(resizedImageUri) {
+export async function BuildMockup(resizedImageUri) {
 	try {
 		const resizedImage = await Image.load(resizedImageUri);
 
-		const templatePath = "/images/mock-template.png";
+		const templatePath = "./public/images/mock-template.png";
 		const template = await Image.load(templatePath);
 		const { height, width, data } = template;
 
@@ -29,6 +29,7 @@ export async function GenerateMockup(resizedImageUri) {
 
 		return await mockup.toDataURL();
 	} catch (err) {
-		console.log("Não foi possível gerar o mockup\n" + err);
+		console.log("Não foi possível buildar o mockup\n" + err);
+		return new Error("Não foi possível gerar o mockup");
 	}
 }

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 
 import { useState } from "react";
+import axios from "axios";
 
 import { FiUpload } from "react-icons/fi";
 import { BasicLayout } from "../../components/BasicLayout";
@@ -9,11 +10,10 @@ import { Button } from "../../components/Button";
 import { DownloadMockup } from "../../components/DownloadMockup";
 import { LogoTitle } from "../../components/LogoTitle";
 
-import { generate } from "../../utils/GenerateMockup";
+import { FileToBase64 } from "../../utils/FileToBase64";
 
 export default function File() {
-	const [selectedFile, setSelectedFile] = useState();
-	const [selectedFileSrc, setSelectedFileSrc] = useState("");
+	const [selectedFileUrl, setselectedFileUrl] = useState("");
 	const [mockupUrl, setMockupUrl] = useState("");
 	const [canDownload, setCanDownload] = useState(false);
 
@@ -21,31 +21,25 @@ export default function File() {
 		setCanDownload((prevState) => !prevState);
 	}
 
-	function handleInputFile(event) {
+	async function handleInputFile(event) {
 		const { files } = event.target;
 
 		if (files) {
-			setSelectedFile(files[0]);
-
-			const imageUrl = URL.createObjectURL(files[0]);
-			setSelectedFileSrc(imageUrl);
+			const imageUrl = await FileToBase64(files[0]);
+			setselectedFileUrl(imageUrl);
 		}
 	}
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 
-		try {
-			if (selectedFile) {
-				const mockup = await generate(selectedFile);
+		const response = await axios.post("/api/generate", {
+			imageUrl: selectedFileUrl,
+		});
 
-				setMockupUrl(mockup);
-				setCanDownload(true);
-			} else {
-				throw new Error("Não foi possível gerar a imagem");
-			}
-		} catch (e) {
-			alert("Error: " + e);
+		if (response.status === 200) {
+			setMockupUrl(response.data.mockupUrl);
+			setCanDownload(true);
 		}
 	}
 
@@ -79,9 +73,9 @@ export default function File() {
 						/>
 					</label>
 
-					{selectedFile && (
+					{selectedFileUrl && (
 						<Image
-							src={selectedFileSrc}
+							src={selectedFileUrl}
 							alt="img"
 							width={345}
 							height={230}

@@ -93,7 +93,7 @@ export const ChooseGenerateMode = () => {
 					<GeneraMethodCard
 						imageSrc="/images/auto-generate.svg"
 						methodName="Geração automática"
-						redirectTo="/"
+						redirectTo="/generate-mode/automatic"
 					/>
 				</main>
 			</section>

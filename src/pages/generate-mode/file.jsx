@@ -10,7 +10,7 @@ import { Button } from "../../components/Button";
 import { DownloadMockup } from "../../components/DownloadMockup";
 import { LogoTitle } from "../../components/LogoTitle";
 
-import { FileToBase64 } from "../../utils/FileToBase64";
+import { fileToBase64 } from "../../utils/fileToBase64";
 
 export default function File() {
 	const [selectedFileUrl, setselectedFileUrl] = useState("");
@@ -25,7 +25,7 @@ export default function File() {
 		const { files } = event.target;
 
 		if (files) {
-			const imageUrl = await FileToBase64(files[0]);
+			const imageUrl = await fileToBase64(files[0]);
 			setselectedFileUrl(imageUrl);
 		}
 	}
@@ -33,13 +33,19 @@ export default function File() {
 	async function handleSubmit(event) {
 		event.preventDefault();
 
-		const response = await axios.post("/api/generate", {
-			imageUrl: selectedFileUrl,
-		});
+		try {
+			const response = await axios.post("/api/generate", {
+				imageUrl: selectedFileUrl,
+				generationMode: "file",
+			});
 
-		if (response.status === 200) {
-			setMockupUrl(response.data.mockupUrl);
-			setCanDownload(true);
+			if (response.status === 200) {
+				setMockupUrl(response.data.mockupUrl);
+				setCanDownload(true);
+			}
+		} catch (err) {
+			console.log(err);
+			alert("Não foi possivel gerar seu mockup");
 		}
 	}
 

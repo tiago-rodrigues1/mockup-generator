@@ -40,8 +40,14 @@ export async function getScreenshot(url) {
 			const browser = await puppeteer.launch(options);
 			const page = await browser.newPage();
 
+			await page.setViewport({
+				width: 1280,
+				height: 800,
+			});
+
+			page.setDefaultNavigationTimeout(0);
+
 			await page.goto(url);
-			await page.waitForNavigation();
 
 			const file = await page.screenshot({ type: "png" });
 

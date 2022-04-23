@@ -1,6 +1,6 @@
 import { Image } from "image-js";
 
-export async function BuildMockup(resizedImageUri) {
+export async function buildMockup(resizedImageUri) {
 	try {
 		const resizedImage = await Image.load(resizedImageUri);
 

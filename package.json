@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "chrome-aws-lambda": "^10.1.0",
     "image-js": "^0.34.0",
     "next": "12.1.5",
     "next-connect": "^0.12.2",
+    "puppeteer-core": "^13.6.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-icons": "^4.3.1"

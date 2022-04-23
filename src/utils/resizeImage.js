@@ -1,6 +1,6 @@
 import { Image } from "image-js";
 
-export async function ResizeImage({
+export async function resizeImage({
 	imageUrl,
 	width,
 	height,
@@ -19,6 +19,6 @@ export async function ResizeImage({
 		console.log(
 			"Não foi foi possível realizar o redimensionamento:\n" + err
 		);
-		return new Error("Não foi possível gerar o mockup");
+		return new Error(err.message);
 	}
 }

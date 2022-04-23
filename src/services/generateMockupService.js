@@ -1,7 +1,7 @@
-import { ResizeImage } from "../utils/ResizeImage";
-import { BuildMockup } from "../utils/BuildMockup";
+import { resizeImage } from "../utils/resizeImage";
+import { buildMockup } from "../utils/buildMockup";
 
-export async function GenerateMockupService(imageUrl) {
+export async function generateMockupService(imageUrl) {
 	const resizeOptions = {
 		imageUrl,
 		width: 686,
@@ -9,13 +9,14 @@ export async function GenerateMockupService(imageUrl) {
 		preserveAspectRatio: false,
 	};
 
-	const resizedImageResponse = await ResizeImage(resizeOptions);
+	console.log(imageUrl);
+	const resizedImageResponse = await resizeImage(resizeOptions);
 
 	if (resizedImageResponse instanceof Error) {
 		return new Error(resizedImageResponse.message);
 	}
 
-	const buildMockupResponse = await BuildMockup(resizedImageResponse);
+	const buildMockupResponse = await buildMockup(resizedImageResponse);
 
 	if (buildMockupResponse instanceof Error) {
 		return new Error(buildMockupResponse.message);

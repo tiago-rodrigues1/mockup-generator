@@ -9,7 +9,6 @@ export async function generateMockupService(imageUrl) {
 		preserveAspectRatio: false,
 	};
 
-	console.log(imageUrl);
 	const resizedImageResponse = await resizeImage(resizeOptions);
 
 	if (resizedImageResponse instanceof Error) {

@@ -1,16 +1,22 @@
 import nc from "next-connect";
 
-import { GenerateMockupService } from "../../services/GenerateMockupService";
+import { generateMockupService } from "../../services/generateMockupService";
+
+import fetchImage from "../../middlewares/fetchImage";
 
 const handler = nc({
-	onError: (err, req, res, next) => {
+	onError: (err, req, res) => {
 		console.error(err.stack);
 		res.status(500).end("Something broke!");
 	},
 	onNoMatch: (req, res) => {
 		res.status(404).end("Page is not found");
 	},
-}).post(async (req, res) => {
+});
+
+handler.use(fetchImage);
+
+handler.post(async (req, res) => {
 	const { imageUrl } = req.body;
 
 	if (!imageUrl) {
@@ -19,7 +25,7 @@ const handler = nc({
 			.json({ ok: false, message: "imageUrl is missing" });
 	}
 
-	const mockupResponse = await GenerateMockupService(imageUrl);
+	const mockupResponse = await generateMockupService(imageUrl);
 
 	if (mockupResponse instanceof Error) {
 		return res

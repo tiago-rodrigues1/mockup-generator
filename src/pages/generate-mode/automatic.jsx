@@ -8,11 +8,13 @@ import { BasicLayout } from "../../components/BasicLayout";
 import { LogoTitle } from "../../components/LogoTitle";
 import { Button } from "../../components/Button";
 import { DownloadMockup } from "../../components/DownloadMockup";
+import { Loading } from "../../components/Loading";
 
 export default function Automatic() {
 	const [pageUrl, setPageUrl] = useState("");
 	const [mockupUrl, setMockupUrl] = useState("");
 	const [canDownload, setCanDownload] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	function togglePopup() {
 		setCanDownload((prevState) => !prevState);
@@ -26,6 +28,7 @@ export default function Automatic() {
 		event.preventDefault();
 
 		try {
+			setIsLoading(true);
 			const response = await axios.post("/api/generate", {
 				imageUrl: pageUrl,
 				generationMode: "auto",
@@ -38,6 +41,8 @@ export default function Automatic() {
 		} catch (err) {
 			console.log(err);
 			alert("Não foi possível gerar seu mockup");
+		} finally {
+			setIsLoading(false);
 		}
 	}
 
@@ -48,6 +53,8 @@ export default function Automatic() {
 			</Head>
 
 			<LogoTitle />
+
+			{isLoading && <Loading message={"Gerando seu mockup..."} />}
 
 			{canDownload ? (
 				<DownloadMockup toggle={togglePopup} mockupUrl={mockupUrl} />

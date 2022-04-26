@@ -29,7 +29,7 @@ export async function buildMockup(resizedImageUri) {
 
 		return await mockup.toDataURL();
 	} catch (err) {
-		console.log("Não foi possível buildar o mockup\n" + err);
-		return new Error("Não foi possível gerar o mockup");
+		console.log("Não foi possível construir o mockup\n" + err);
+		return new Error("Perdão, mas não foi possível gerar o mockup");
 	}
 }

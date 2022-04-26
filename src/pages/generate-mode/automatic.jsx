@@ -2,7 +2,9 @@ import Head from "next/head";
 
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
+import { Toaster } from "react-hot-toast";
 import { FiLink } from "react-icons/fi";
 import { BasicLayout } from "../../components/BasicLayout";
 import { LogoTitle } from "../../components/LogoTitle";
@@ -27,6 +29,8 @@ export default function Automatic() {
 	async function handleSubmit(event) {
 		event.preventDefault();
 
+		let responseMessage;
+
 		try {
 			setIsLoading(true);
 			const response = await axios.post("/api/generate", {
@@ -34,13 +38,20 @@ export default function Automatic() {
 				generationMode: "auto",
 			});
 
+			responseMessage = response.data.message;
+
 			if (response.status === 200) {
+				toast.success("Mockup gerado com sucesso!");
+
 				setMockupUrl(response.data.mockupUrl);
 				setCanDownload(true);
 			}
 		} catch (err) {
 			console.log(err);
-			alert("Não foi possível gerar seu mockup");
+			toast.error(
+				responseMessage ||
+					"Infelizmente não conseguimos gerar o seu mockup"
+			);
 		} finally {
 			setIsLoading(false);
 		}
@@ -51,6 +62,8 @@ export default function Automatic() {
 			<Head>
 				<title>Auto Generation</title>
 			</Head>
+
+			<Toaster />
 
 			<LogoTitle />
 

@@ -7,10 +7,13 @@ import fetchImage from "../../middlewares/fetchImage";
 const handler = nc({
 	onError: (err, req, res) => {
 		console.error(err.stack);
-		res.status(500).end("Something broke!");
+		res.status(500).json({
+			ok: false,
+			message: "Não foi possível gerar o mockup",
+		});
 	},
 	onNoMatch: (req, res) => {
-		res.status(404).end("Page is not found");
+		res.status(404).json({ ok: false, message: "Página não encontrada" });
 	},
 });
 
@@ -22,7 +25,7 @@ handler.post(async (req, res) => {
 	if (!imageUrl) {
 		return res
 			.status(400)
-			.json({ ok: false, message: "imageUrl is missing" });
+			.json({ ok: false, message: "faltando imageUrl" });
 	}
 
 	const mockupResponse = await generateMockupService(imageUrl);

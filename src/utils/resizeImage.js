@@ -19,6 +19,6 @@ export async function resizeImage({
 		console.log(
 			"Não foi foi possível realizar o redimensionamento:\n" + err
 		);
-		return new Error(err.message);
+		return new Error("Perdão, mas não foi possível gerar o mockup");
 	}
 }

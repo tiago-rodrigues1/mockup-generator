@@ -3,7 +3,9 @@ import Image from "next/image";
 
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
+import { Toaster } from "react-hot-toast";
 import { FiUpload } from "react-icons/fi";
 import { BasicLayout } from "../../components/BasicLayout";
 import { Button } from "../../components/Button";
@@ -35,6 +37,8 @@ export default function File() {
 	async function handleSubmit(event) {
 		event.preventDefault();
 
+		let responseMessage;
+
 		try {
 			setIsLoading(true);
 			const response = await axios.post("/api/generate", {
@@ -42,13 +46,20 @@ export default function File() {
 				generationMode: "file",
 			});
 
+			responseMessage = response.data.message;
+
 			if (response.status === 200) {
+				toast.success("Mockup gerado com sucesso!");
+
 				setMockupUrl(response.data.mockupUrl);
 				setCanDownload(true);
 			}
 		} catch (err) {
 			console.log(err);
-			alert("Não foi possivel gerar seu mockup");
+			toast.error(
+				responseMessage ||
+					"Infelizmente não conseguimos gerar o seu mockup"
+			);
 		} finally {
 			setIsLoading(false);
 		}
@@ -59,6 +70,8 @@ export default function File() {
 			<Head>
 				<title>Generate by File</title>
 			</Head>
+
+			<Toaster />
 
 			<LogoTitle />
 
